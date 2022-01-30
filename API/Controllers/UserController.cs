@@ -2,25 +2,45 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Http;
-using System.Web.Mvc;
-using System.Net.Http;
-using System.Net;
+using DTO;
 using BL;
+using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace API.Controllers
 {
-    [System.Web.Http.RoutePrefix("api/user")]
-    public class UserController : Controller
+    [EnableCors(methods:"*",origins:"*",headers:"*")]
+    [RoutePrefix("api/user")]
+    public class UserController : ApiController
     {
-        //[System.Web.Http.HttpGet]
-        //[System.Web.Http.Route("all")]
-
-
-
-
-
-
-
+        
+        [Route("getUser")]
+        [HttpGet]
+        public UserDTO GetUser(string userName,string password)
+        {
+            UserDTO u = UserBL.GetUserByUserNameAndPassword(userName, password);
+            
+            return u;
+            
+              
+        }
+        [Route("addUser")]
+        [HttpPost]
+        public IHttpActionResult AddUser(UserDTO u)
+        {
+            if (UserBL.CheckIfUserExist(u.id))
+                return Conflict();
+            UserBL.AddUser(u);
+            return Created("Added successfully", u);
+        }
+        //האם צריך להחזיר את העצם ואם זה created בכלל
+        [Route ("updateUser")]
+        [HttpPut]
+        public IHttpActionResult UpdateUser(UserDTO u)
+        {
+            if (!UserBL.UpdateUser(u))
+                return Conflict();
+            return Created("update successfully", u);
+        }
     }
 }

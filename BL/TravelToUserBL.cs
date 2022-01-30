@@ -20,6 +20,11 @@ namespace BL
             var tt = TravelToUserDTO.ToTravelToUser(t);
             TravelsToUserDAL.DeleteTravelToUser(userId, tt);
         }
+        public static List<TravelToUserDTO> GetAllTravelsToUser(string id)
+        {
+            var t = TravelsToUserDAL.GetTravelsToUser(id);
+            return TravelToUserDTO.ToListOfTravelToUserDTO(t);
+                }
         
 
         

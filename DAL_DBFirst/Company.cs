@@ -17,13 +17,13 @@ namespace DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Company()
         {
-            this.Buses = new HashSet<Bus>();
+            this.Lines = new HashSet<Line>();
         }
     
         public int companyCode { get; set; }
         public string companyName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Bus> Buses { get; set; }
+        public virtual ICollection<Line> Lines { get; set; }
     }
 }

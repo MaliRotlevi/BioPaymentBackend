@@ -18,14 +18,14 @@ namespace DAL
         public User()
         {
             this.ConstractToUsers = new HashSet<ConstractToUser>();
-            this.Travels = new HashSet<Travel>();
             this.TravelToUsers = new HashSet<TravelToUser>();
+            this.Travels = new HashSet<Travel>();
         }
     
         public string id { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
-        public string birthDate { get; set; }
+        public Nullable<System.DateTime> birthDate { get; set; }
         public string userName { get; set; }
         public string password { get; set; }
         public byte[] fingerPrint { get; set; }
@@ -36,8 +36,8 @@ namespace DAL
         public virtual ICollection<ConstractToUser> ConstractToUsers { get; set; }
         public virtual Profile Profile { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Travel> Travels { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TravelToUser> TravelToUsers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Travel> Travels { get; set; }
     }
 }

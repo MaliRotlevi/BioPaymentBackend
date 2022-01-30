@@ -26,7 +26,7 @@ namespace DTO
             uu.id = u.id;
             uu.firstName = u.firstName;
             uu.lastName = u.lastName;
-            // uu.birthDate = u.birthDate;
+            uu.birthDate = (DateTime)u.birthDate;
             uu.userName = u.userName;
             uu.password = u.password;
             //uu.fingerPrint = u.fingerPrint;
@@ -41,7 +41,7 @@ namespace DTO
             uu.id = u.id;
             uu.firstName = u.firstName;
             uu.lastName = u.lastName;
-            // uu.birthDate = u.birthDate;
+            uu.birthDate = u.birthDate;
             uu.userName = u.userName;
             uu.password = u.password;
             //uu.fingerPrint = u.fingerPrint;

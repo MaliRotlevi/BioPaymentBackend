@@ -28,6 +28,16 @@ namespace DAL
             }
 
         }
+        //פעולה מוזרהה
+        public static List<TravelToUser> GetTravelsToUser(string id)
+        {
+            var t = new List<TravelToUser>();
+            using (fingerPrintInBusDBEntities db = new fingerPrintInBusDBEntities())
+            {
+                t = (List<TravelToUser>)db.TravelToUsers.ToList().Where(x => x.userId == id);
+                return t;
+            }
+        }
 
 
     }

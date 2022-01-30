@@ -10,32 +10,27 @@ namespace DTO
     class BusDTO
     {
         public int codeBus;
-        public string busLine;
-        public double price;
-        public int companyCode;
+        public int lineCode;
+
 
         public static BusDTO ToBusDTO(Bus b)
         {
             BusDTO bb = new BusDTO();
             bb.codeBus = b.codeBus;
-            bb.busLine = b.busLine;
-            bb.price = (int)b.price;
-            bb.companyCode = (int)b.companyCode;
+            bb.lineCode = b.codeLine;
             return bb;
         }
         public static Bus ToBus(BusDTO b)
         {
             Bus bb = new Bus();
             bb.codeBus = b.codeBus;
-            bb.busLine = b.busLine;
-            bb.price = b.price;
-            bb.companyCode = b.companyCode;
+            bb.codeLine = b.lineCode;
             return bb;
         }
         public static List<BusDTO> ToListBusDTO(List<Bus> b)
         {
-            List<BusDTO> bb =new List<BusDTO>();
-            foreach(var item in b)
+            List<BusDTO> bb = new List<BusDTO>();
+            foreach (var item in b)
             {
                 bb.Add(ToBusDTO(item));
             }

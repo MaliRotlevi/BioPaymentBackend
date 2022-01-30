@@ -53,6 +53,7 @@
     <Compile Include="ConstractToUserDTO.cs" />
     <Compile Include="ConstractTravelDTO.cs" />
     <Compile Include="LibraryContext.cs" />
+    <Compile Include="LineDTO.cs" />
     <Compile Include="ProfileDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TravelDTO.cs" />

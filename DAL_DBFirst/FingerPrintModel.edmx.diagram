@@ -4,25 +4,29 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f39a59b700354eefba1a1e868a762bb6" Name="Diagram1" ZoomLevel="121">
-        <EntityTypeShape EntityType="fingerPrintInBusDBModel.Area" Width="1.5" PointX="9" PointY="3.375" />
-        <EntityTypeShape EntityType="fingerPrintInBusDBModel.Bus" Width="1.5" PointX="9" PointY="0.625" />
-        <EntityTypeShape EntityType="fingerPrintInBusDBModel.Company" Width="1.5" PointX="10.625" PointY="0.875" />
-        <EntityTypeShape EntityType="fingerPrintInBusDBModel.ConstractToUser" Width="1.5" PointX="5.25" PointY="4" />
-        <EntityTypeShape EntityType="fingerPrintInBusDBModel.ConstractTravel" Width="1.5" PointX="13" PointY="5.375" />
-        <EntityTypeShape EntityType="fingerPrintInBusDBModel.Profile" Width="1.5" PointX="0.75" PointY="4.125" />
-        <EntityTypeShape EntityType="fingerPrintInBusDBModel.Travel" Width="1.5" PointX="5.25" PointY="0.875" />
+      <Diagram DiagramId="f39a59b700354eefba1a1e868a762bb6" Name="Diagram1" ZoomLevel="53">
+        <EntityTypeShape EntityType="fingerPrintInBusDBModel.Area" Width="1.5" PointX="9.375" PointY="3.25" />
+        <EntityTypeShape EntityType="fingerPrintInBusDBModel.Company" Width="1.5" PointX="11.625" PointY="0.625" />
+        <EntityTypeShape EntityType="fingerPrintInBusDBModel.ConstractToUser" Width="1.5" PointX="4.25" PointY="4.125" />
+        <EntityTypeShape EntityType="fingerPrintInBusDBModel.ConstractTravel" Width="1.5" PointX="12.25" PointY="3" />
+        <EntityTypeShape EntityType="fingerPrintInBusDBModel.Profile" Width="1.5" PointX="1.625" PointY="4.625" />
         <EntityTypeShape EntityType="fingerPrintInBusDBModel.TravelToUser" Width="1.5" PointX="7.25" PointY="0.5" />
-        <EntityTypeShape EntityType="fingerPrintInBusDBModel.User" Width="1.5" PointX="0.875" PointY="0.5" />
         <AssociationConnector Association="fingerPrintInBusDBModel.FK_Areas_tbl_Areas_tbl" />
-        <AssociationConnector Association="fingerPrintInBusDBModel.FK_Buses_tbl_Companies_tbl" />
-        <AssociationConnector Association="fingerPrintInBusDBModel.FK_Travels_tbl0_Buses_tbl" />
-        <AssociationConnector Association="fingerPrintInBusDBModel.FK_ConstractToUser_ConstractToUser" />
         <AssociationConnector Association="fingerPrintInBusDBModel.FK_ConstractToUser_ConstractTravel" />
+        <EntityTypeShape EntityType="fingerPrintInBusDBModel.User" Width="1.5" PointX="1.375" PointY="0.5" />
+        <AssociationConnector Association="fingerPrintInBusDBModel.FK_ConstractToUser_ConstractToUser" />
         <AssociationConnector Association="fingerPrintInBusDBModel.FK_User_tbl_Profiles_tbl" />
+        <AssociationConnector Association="fingerPrintInBusDBModel.FK_TravelToUser_tbl_User_tbl" />
+        <EntityTypeShape EntityType="fingerPrintInBusDBModel.Line" Width="1.5" PointX="15" PointY="1.75" />
+        <EntityTypeShape EntityType="fingerPrintInBusDBModel.sysdiagram" Width="1.5" PointX="7" PointY="4.25" />
+        <EntityTypeShape EntityType="fingerPrintInBusDBModel.Travel" Width="1.5" PointX="3.75" PointY="1.125" />
+        <AssociationConnector Association="fingerPrintInBusDBModel.FK_Lines_Areas" />
+        <AssociationConnector Association="fingerPrintInBusDBModel.FK_Lines_Companies" />
         <AssociationConnector Association="fingerPrintInBusDBModel.FK_Travels_tbl0_User_tbl" />
         <AssociationConnector Association="fingerPrintInBusDBModel.FK_TravelToUser_tbl_TravelToUser_tbl" />
-        <AssociationConnector Association="fingerPrintInBusDBModel.FK_TravelToUser_tbl_User_tbl" />
+        <EntityTypeShape EntityType="fingerPrintInBusDBModel.Bus" Width="1.5" PointX="17.25" PointY="2.125" />
+        <AssociationConnector Association="fingerPrintInBusDBModel.FK_Buses_Lines" />
+        <AssociationConnector Association="fingerPrintInBusDBModel.FK_Travels_Buses" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

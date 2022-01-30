@@ -12,13 +12,12 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class ConstractToUser
+    public partial class sysdiagram
     {
-        public int constractCode { get; set; }
-        public string userId { get; set; }
-        public double accumulatedAmount { get; set; }
-    
-        public virtual ConstractTravel ConstractTravel { get; set; }
-        public virtual User User { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

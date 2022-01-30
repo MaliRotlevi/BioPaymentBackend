@@ -28,6 +28,8 @@ namespace BL
         public static UserDTO GetUserByUserNameAndPassword(string userName,string password)
         {
             User u = UserDAL.GetUserByUserNameAndPassword(userName, password);
+            if (u == null)
+                return null;
             var userDTO = UserDTO.ToUserDTO(u);
             return userDTO;
         }
@@ -43,6 +45,16 @@ namespace BL
         public static void UpdateProfile(int profileCode,string id)
         {
             UpdateProfile(profileCode,id);
+        }
+        public static bool CheckIfUserExist(string id)
+        {
+            return UserDAL.GetUserById(id);
+
+        }
+        public static bool UpdateUser(UserDTO u)
+        {
+            User uu = UserDTO.ToUser(u);
+            return UserDAL.UpdateUser(uu);
         }
     }
 }
