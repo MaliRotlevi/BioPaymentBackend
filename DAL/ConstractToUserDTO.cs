@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DTO
 {
-    class ConstractToUserDTO
+    public class ConstractToUserDTO
     {
         public int constractCode;
         public string userId;

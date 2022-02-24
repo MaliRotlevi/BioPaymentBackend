@@ -25,9 +25,9 @@ namespace DAL
         public Nullable<System.DateTime> date { get; set; }
         public string driverId { get; set; }
     
+        public virtual Bus Bus { get; set; }
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TravelToUser> TravelToUsers { get; set; }
-        public virtual Bus Bus { get; set; }
     }
 }

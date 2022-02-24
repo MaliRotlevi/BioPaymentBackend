@@ -18,7 +18,7 @@ namespace DAL
         public string userId { get; set; }
         public double accumulatedAmount { get; set; }
     
-        public virtual ConstractTravel ConstractTravel { get; set; }
         public virtual User User { get; set; }
+        public virtual ConstractTravel ConstractTravel { get; set; }
     }
 }

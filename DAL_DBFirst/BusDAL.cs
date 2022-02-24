@@ -10,7 +10,7 @@ namespace DAL
     {
         public static void AddBus(Bus b)
         {
-            using (fingerPrintInBusDBEntities db = new fingerPrintInBusDBEntities())
+            using (FINGERPRINTINBUSDBEntities db = new FINGERPRINTINBUSDBEntities())
             {
                 db.Buses.Add(b);
                 db.SaveChanges();

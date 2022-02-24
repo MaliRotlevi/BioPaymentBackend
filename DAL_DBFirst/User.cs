@@ -18,8 +18,8 @@ namespace DAL
         public User()
         {
             this.ConstractToUsers = new HashSet<ConstractToUser>();
-            this.TravelToUsers = new HashSet<TravelToUser>();
             this.Travels = new HashSet<Travel>();
+            this.TravelToUsers = new HashSet<TravelToUser>();
         }
     
         public string id { get; set; }
@@ -36,8 +36,8 @@ namespace DAL
         public virtual ICollection<ConstractToUser> ConstractToUsers { get; set; }
         public virtual Profile Profile { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TravelToUser> TravelToUsers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Travel> Travels { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TravelToUser> TravelToUsers { get; set; }
     }
 }

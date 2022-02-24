@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="fingerPrintInBusDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="FINGERPRINTINBUSDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Areas">
           <Key>
             <PropertyRef Name="areaCode" />
@@ -32,7 +32,7 @@
             <PropertyRef Name="userId" />
           </Key>
           <Property Name="constractCode" Type="int" Nullable="false" />
-          <Property Name="userId" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="userId" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="accumulatedAmount" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="ConstractTravel">
@@ -76,14 +76,14 @@
           <Property Name="travelCode" Type="int" Nullable="false" />
           <Property Name="busCode" Type="int" />
           <Property Name="date" Type="datetime" />
-          <Property Name="driverId" Type="nchar" MaxLength="10" />
+          <Property Name="driverId" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="TravelToUser">
           <Key>
             <PropertyRef Name="userId" />
             <PropertyRef Name="travelCode" />
           </Key>
-          <Property Name="userId" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="userId" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="travelCode" Type="int" Nullable="false" />
           <Property Name="date" Type="date" Nullable="false" />
           <Property Name="hour" Type="time" Precision="7" Nullable="false" />
@@ -94,7 +94,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="id" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="firstName" Type="nchar" MaxLength="10" />
           <Property Name="lastName" Type="nchar" MaxLength="10" />
           <Property Name="birthDate" Type="datetime" />
@@ -224,7 +224,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="fingerPrintInBusDBModelStoreContainer">
+        <EntityContainer Name="FINGERPRINTINBUSDBModelStoreContainer">
           <EntitySet Name="Areas" EntityType="Self.Areas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Buses" EntityType="Self.Buses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Companies" EntityType="Self.Companies" Schema="dbo" store:Type="Tables" />
@@ -280,73 +280,23 @@
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="fingerPrintInBusDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="fingerPrintInBusDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Areas" EntityType="fingerPrintInBusDBModel.Area" />
-          <EntitySet Name="Companies" EntityType="fingerPrintInBusDBModel.Company" />
-          <EntitySet Name="ConstractToUsers" EntityType="fingerPrintInBusDBModel.ConstractToUser" />
-          <EntitySet Name="ConstractTravels" EntityType="fingerPrintInBusDBModel.ConstractTravel" />
-          <EntitySet Name="Profiles" EntityType="fingerPrintInBusDBModel.Profile" />
-          <EntitySet Name="TravelToUsers" EntityType="fingerPrintInBusDBModel.TravelToUser" />
-          <AssociationSet Name="FK_Areas_tbl_Areas_tbl" Association="fingerPrintInBusDBModel.FK_Areas_tbl_Areas_tbl">
-            <End Role="Area" EntitySet="Areas" />
-            <End Role="Area1" EntitySet="Areas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ConstractToUser_ConstractTravel" Association="fingerPrintInBusDBModel.FK_ConstractToUser_ConstractTravel">
-            <End Role="ConstractTravel" EntitySet="ConstractTravels" />
-            <End Role="ConstractToUser" EntitySet="ConstractToUsers" />
-          </AssociationSet>
-          <EntitySet Name="Users" EntityType="fingerPrintInBusDBModel.User" />
-          <AssociationSet Name="FK_ConstractToUser_ConstractToUser" Association="fingerPrintInBusDBModel.FK_ConstractToUser_ConstractToUser">
-            <End Role="User" EntitySet="Users" />
-            <End Role="ConstractToUser" EntitySet="ConstractToUsers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_tbl_Profiles_tbl" Association="fingerPrintInBusDBModel.FK_User_tbl_Profiles_tbl">
-            <End Role="Profile" EntitySet="Profiles" />
-            <End Role="User" EntitySet="Users" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TravelToUser_tbl_User_tbl" Association="fingerPrintInBusDBModel.FK_TravelToUser_tbl_User_tbl">
-            <End Role="User" EntitySet="Users" />
-            <End Role="TravelToUser" EntitySet="TravelToUsers" />
-          </AssociationSet>
-          <EntitySet Name="Lines" EntityType="fingerPrintInBusDBModel.Line" />
-          <EntitySet Name="sysdiagrams" EntityType="fingerPrintInBusDBModel.sysdiagram" />
-          <EntitySet Name="Travels" EntityType="fingerPrintInBusDBModel.Travel" />
-          <AssociationSet Name="FK_Lines_Areas" Association="fingerPrintInBusDBModel.FK_Lines_Areas">
-            <End Role="Area" EntitySet="Areas" />
-            <End Role="Line" EntitySet="Lines" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Lines_Companies" Association="fingerPrintInBusDBModel.FK_Lines_Companies">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="Line" EntitySet="Lines" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Travels_tbl0_User_tbl" Association="fingerPrintInBusDBModel.FK_Travels_tbl0_User_tbl">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Travel" EntitySet="Travels" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TravelToUser_tbl_TravelToUser_tbl" Association="fingerPrintInBusDBModel.FK_TravelToUser_tbl_TravelToUser_tbl">
-            <End Role="Travel" EntitySet="Travels" />
-            <End Role="TravelToUser" EntitySet="TravelToUsers" />
-          </AssociationSet>
-          <EntitySet Name="Buses" EntityType="fingerPrintInBusDBModel.Bus" />
-          <AssociationSet Name="FK_Buses_Lines" Association="fingerPrintInBusDBModel.FK_Buses_Lines">
-            <End Role="Line" EntitySet="Lines" />
-            <End Role="Bus" EntitySet="Buses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Travels_Buses" Association="fingerPrintInBusDBModel.FK_Travels_Buses">
-            <End Role="Bus" EntitySet="Buses" />
-            <End Role="Travel" EntitySet="Travels" />
-          </AssociationSet>
-        </EntityContainer>
+      <Schema Namespace="FINGERPRINTINBUSDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Area">
           <Key>
             <PropertyRef Name="areaCode" />
           </Key>
           <Property Name="areaCode" Type="Int32" Nullable="false" />
-          <Property Name="areaName" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="Areas1" Relationship="fingerPrintInBusDBModel.FK_Areas_tbl_Areas_tbl" FromRole="Area" ToRole="Area1" />
-          <NavigationProperty Name="Area1" Relationship="fingerPrintInBusDBModel.FK_Areas_tbl_Areas_tbl" FromRole="Area1" ToRole="Area" />
-          <NavigationProperty Name="Lines" Relationship="fingerPrintInBusDBModel.FK_Lines_Areas" FromRole="Area" ToRole="Line" />
+          <Property Name="areaName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Lines" Relationship="Self.FK_Lines_Areas" FromRole="Areas" ToRole="Lines" />
+        </EntityType>
+        <EntityType Name="Bus">
+          <Key>
+            <PropertyRef Name="codeBus" />
+          </Key>
+          <Property Name="codeBus" Type="Int32" Nullable="false" />
+          <Property Name="codeLine" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Line" Relationship="Self.FK_Buses_Lines" FromRole="Buses" ToRole="Lines" />
+          <NavigationProperty Name="Travels" Relationship="Self.FK_Travels_Buses" FromRole="Buses" ToRole="Travels" />
         </EntityType>
         <EntityType Name="Company">
           <Key>
@@ -354,7 +304,7 @@
           </Key>
           <Property Name="companyCode" Type="Int32" Nullable="false" />
           <Property Name="companyName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="Lines" Relationship="fingerPrintInBusDBModel.FK_Lines_Companies" FromRole="Company" ToRole="Line" />
+          <NavigationProperty Name="Lines" Relationship="Self.FK_Lines_Companies" FromRole="Companies" ToRole="Lines" />
         </EntityType>
         <EntityType Name="ConstractToUser">
           <Key>
@@ -362,119 +312,19 @@
             <PropertyRef Name="userId" />
           </Key>
           <Property Name="constractCode" Type="Int32" Nullable="false" />
-          <Property Name="userId" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="userId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="accumulatedAmount" Type="Double" Nullable="false" />
-          <NavigationProperty Name="ConstractTravel" Relationship="fingerPrintInBusDBModel.FK_ConstractToUser_ConstractTravel" FromRole="ConstractToUser" ToRole="ConstractTravel" />
-          <NavigationProperty Name="User" Relationship="fingerPrintInBusDBModel.FK_ConstractToUser_ConstractToUser" FromRole="ConstractToUser" ToRole="User" />
+          <NavigationProperty Name="User" Relationship="Self.FK_ConstractToUser_ConstractToUser" FromRole="ConstractToUser" ToRole="User" />
+          <NavigationProperty Name="ConstractTravel" Relationship="Self.FK_ConstractToUser_ConstractTravel" FromRole="ConstractToUser" ToRole="ConstractTravel" />
         </EntityType>
         <EntityType Name="ConstractTravel">
           <Key>
             <PropertyRef Name="contractCode" />
           </Key>
           <Property Name="contractCode" Type="Int32" Nullable="false" />
-          <Property Name="contractName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ConstractToUsers" Relationship="fingerPrintInBusDBModel.FK_ConstractToUser_ConstractTravel" FromRole="ConstractTravel" ToRole="ConstractToUser" />
+          <Property Name="contractName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ConstractToUsers" Relationship="Self.FK_ConstractToUser_ConstractTravel" FromRole="ConstractTravel" ToRole="ConstractToUser" />
         </EntityType>
-        <EntityType Name="Profile">
-          <Key>
-            <PropertyRef Name="profileCode" />
-          </Key>
-          <Property Name="profileCode" Type="Int32" Nullable="false" />
-          <Property Name="profileName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="Users" Relationship="fingerPrintInBusDBModel.FK_User_tbl_Profiles_tbl" FromRole="Profile" ToRole="User" />
-        </EntityType>
-        <EntityType Name="TravelToUser">
-          <Key>
-            <PropertyRef Name="userId" />
-            <PropertyRef Name="travelCode" />
-          </Key>
-          <Property Name="userId" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="travelCode" Type="Int32" Nullable="false" />
-          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="hour" Type="Time" Nullable="false" Precision="7" />
-          <Property Name="boardingStation" Type="Int32" Nullable="false" />
-          <Property Name="dropStation" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="fingerPrintInBusDBModel.FK_TravelToUser_tbl_User_tbl" FromRole="TravelToUser" ToRole="User" />
-          <NavigationProperty Name="Travel" Relationship="fingerPrintInBusDBModel.FK_TravelToUser_tbl_TravelToUser_tbl" FromRole="TravelToUser" ToRole="Travel" />
-        </EntityType>
-        <Association Name="FK_Areas_tbl_Areas_tbl">
-          <End Type="fingerPrintInBusDBModel.Area" Role="Area" Multiplicity="1" />
-          <End Type="fingerPrintInBusDBModel.Area" Role="Area1" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Area">
-              <PropertyRef Name="areaCode" />
-            </Principal>
-            <Dependent Role="Area1">
-              <PropertyRef Name="areaCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ConstractToUser_ConstractTravel">
-          <End Type="fingerPrintInBusDBModel.ConstractTravel" Role="ConstractTravel" Multiplicity="1" />
-          <End Type="fingerPrintInBusDBModel.ConstractToUser" Role="ConstractToUser" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ConstractTravel">
-              <PropertyRef Name="contractCode" />
-            </Principal>
-            <Dependent Role="ConstractToUser">
-              <PropertyRef Name="constractCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="firstName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="lastName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="birthDate" Type="DateTime" Precision="3" />
-          <Property Name="userName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="password" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="fingerPrint" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="profileCode" Type="Int32" />
-          <Property Name="isDriver" Type="Boolean" />
-          <NavigationProperty Name="ConstractToUsers" Relationship="fingerPrintInBusDBModel.FK_ConstractToUser_ConstractToUser" FromRole="User" ToRole="ConstractToUser" />
-          <NavigationProperty Name="Profile" Relationship="fingerPrintInBusDBModel.FK_User_tbl_Profiles_tbl" FromRole="User" ToRole="Profile" />
-          <NavigationProperty Name="TravelToUsers" Relationship="fingerPrintInBusDBModel.FK_TravelToUser_tbl_User_tbl" FromRole="User" ToRole="TravelToUser" />
-          <NavigationProperty Name="Travels" Relationship="fingerPrintInBusDBModel.FK_Travels_tbl0_User_tbl" FromRole="User" ToRole="Travel" />
-        </EntityType>
-        <Association Name="FK_ConstractToUser_ConstractToUser">
-          <End Type="fingerPrintInBusDBModel.User" Role="User" Multiplicity="1" />
-          <End Type="fingerPrintInBusDBModel.ConstractToUser" Role="ConstractToUser" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="ConstractToUser">
-              <PropertyRef Name="userId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_User_tbl_Profiles_tbl">
-          <End Type="fingerPrintInBusDBModel.Profile" Role="Profile" Multiplicity="0..1" />
-          <End Type="fingerPrintInBusDBModel.User" Role="User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Profile">
-              <PropertyRef Name="profileCode" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="profileCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TravelToUser_tbl_User_tbl">
-          <End Type="fingerPrintInBusDBModel.User" Role="User" Multiplicity="1" />
-          <End Type="fingerPrintInBusDBModel.TravelToUser" Role="TravelToUser" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="TravelToUser">
-              <PropertyRef Name="userId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Line">
           <Key>
             <PropertyRef Name="codeLine" />
@@ -484,15 +334,23 @@
           <Property Name="codeArea" Type="Int32" />
           <Property Name="price" Type="Double" />
           <Property Name="companyCode" Type="Int32" />
-          <NavigationProperty Name="Area" Relationship="fingerPrintInBusDBModel.FK_Lines_Areas" FromRole="Line" ToRole="Area" />
-          <NavigationProperty Name="Company" Relationship="fingerPrintInBusDBModel.FK_Lines_Companies" FromRole="Line" ToRole="Company" />
-          <NavigationProperty Name="Buses" Relationship="fingerPrintInBusDBModel.FK_Buses_Lines" FromRole="Line" ToRole="Bus" />
+          <NavigationProperty Name="Area" Relationship="Self.FK_Lines_Areas" FromRole="Lines" ToRole="Areas" />
+          <NavigationProperty Name="Buses" Relationship="Self.FK_Buses_Lines" FromRole="Lines" ToRole="Buses" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_Lines_Companies" FromRole="Lines" ToRole="Companies" />
+        </EntityType>
+        <EntityType Name="Profile">
+          <Key>
+            <PropertyRef Name="profileCode" />
+          </Key>
+          <Property Name="profileCode" Type="Int32" Nullable="false" />
+          <Property Name="profileName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_User_tbl_Profiles_tbl" FromRole="Profiles" ToRole="User" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="principal_id" Type="Int32" Nullable="false" />
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
@@ -505,52 +363,144 @@
           <Property Name="travelCode" Type="Int32" Nullable="false" />
           <Property Name="busCode" Type="Int32" />
           <Property Name="date" Type="DateTime" Precision="3" />
-          <Property Name="driverId" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="User" Relationship="fingerPrintInBusDBModel.FK_Travels_tbl0_User_tbl" FromRole="Travel" ToRole="User" />
-          <NavigationProperty Name="TravelToUsers" Relationship="fingerPrintInBusDBModel.FK_TravelToUser_tbl_TravelToUser_tbl" FromRole="Travel" ToRole="TravelToUser" />
-          <NavigationProperty Name="Bus" Relationship="fingerPrintInBusDBModel.FK_Travels_Buses" FromRole="Travel" ToRole="Bus" />
+          <Property Name="driverId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Bus" Relationship="Self.FK_Travels_Buses" FromRole="Travels" ToRole="Buses" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Travels_tbl0_User_tbl" FromRole="Travels" ToRole="User" />
+          <NavigationProperty Name="TravelToUsers" Relationship="Self.FK_TravelToUser_tbl_TravelToUser_tbl" FromRole="Travels" ToRole="TravelToUser" />
+        </EntityType>
+        <EntityType Name="TravelToUser">
+          <Key>
+            <PropertyRef Name="userId" />
+            <PropertyRef Name="travelCode" />
+          </Key>
+          <Property Name="userId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="travelCode" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="hour" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="boardingStation" Type="Int32" Nullable="false" />
+          <Property Name="dropStation" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Travel" Relationship="Self.FK_TravelToUser_tbl_TravelToUser_tbl" FromRole="TravelToUser" ToRole="Travels" />
+          <NavigationProperty Name="User" Relationship="Self.FK_TravelToUser_tbl_User_tbl" FromRole="TravelToUser" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="firstName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="lastName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="birthDate" Type="DateTime" Precision="3" />
+          <Property Name="userName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="fingerPrint" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="profileCode" Type="Int32" />
+          <Property Name="isDriver" Type="Boolean" />
+          <NavigationProperty Name="ConstractToUsers" Relationship="Self.FK_ConstractToUser_ConstractToUser" FromRole="User" ToRole="ConstractToUser" />
+          <NavigationProperty Name="Profile" Relationship="Self.FK_User_tbl_Profiles_tbl" FromRole="User" ToRole="Profiles" />
+          <NavigationProperty Name="Travels" Relationship="Self.FK_Travels_tbl0_User_tbl" FromRole="User" ToRole="Travels" />
+          <NavigationProperty Name="TravelToUsers" Relationship="Self.FK_TravelToUser_tbl_User_tbl" FromRole="User" ToRole="TravelToUser" />
         </EntityType>
         <Association Name="FK_Lines_Areas">
-          <End Type="fingerPrintInBusDBModel.Area" Role="Area" Multiplicity="0..1" />
-          <End Type="fingerPrintInBusDBModel.Line" Role="Line" Multiplicity="*" />
+          <End Role="Areas" Type="Self.Area" Multiplicity="0..1" />
+          <End Role="Lines" Type="Self.Line" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Area">
+            <Principal Role="Areas">
               <PropertyRef Name="areaCode" />
             </Principal>
-            <Dependent Role="Line">
+            <Dependent Role="Lines">
               <PropertyRef Name="codeArea" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Lines_Companies">
-          <End Type="fingerPrintInBusDBModel.Company" Role="Company" Multiplicity="0..1" />
-          <End Type="fingerPrintInBusDBModel.Line" Role="Line" Multiplicity="*" />
+        <Association Name="FK_Buses_Lines">
+          <End Role="Lines" Type="Self.Line" Multiplicity="1" />
+          <End Role="Buses" Type="Self.Bus" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Company">
+            <Principal Role="Lines">
+              <PropertyRef Name="codeLine" />
+            </Principal>
+            <Dependent Role="Buses">
+              <PropertyRef Name="codeLine" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Travels_Buses">
+          <End Role="Buses" Type="Self.Bus" Multiplicity="0..1" />
+          <End Role="Travels" Type="Self.Travel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buses">
+              <PropertyRef Name="codeBus" />
+            </Principal>
+            <Dependent Role="Travels">
+              <PropertyRef Name="busCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lines_Companies">
+          <End Role="Companies" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="Lines" Type="Self.Line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companies">
               <PropertyRef Name="companyCode" />
             </Principal>
-            <Dependent Role="Line">
+            <Dependent Role="Lines">
               <PropertyRef Name="companyCode" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Travels_tbl0_User_tbl">
-          <End Type="fingerPrintInBusDBModel.User" Role="User" Multiplicity="0..1" />
-          <End Type="fingerPrintInBusDBModel.Travel" Role="Travel" Multiplicity="*" />
+        <Association Name="FK_ConstractToUser_ConstractToUser">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="ConstractToUser" Type="Self.ConstractToUser" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="Travel">
+            <Dependent Role="ConstractToUser">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConstractToUser_ConstractTravel">
+          <End Role="ConstractTravel" Type="Self.ConstractTravel" Multiplicity="1" />
+          <End Role="ConstractToUser" Type="Self.ConstractToUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ConstractTravel">
+              <PropertyRef Name="contractCode" />
+            </Principal>
+            <Dependent Role="ConstractToUser">
+              <PropertyRef Name="constractCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_tbl_Profiles_tbl">
+          <End Role="Profiles" Type="Self.Profile" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profiles">
+              <PropertyRef Name="profileCode" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="profileCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Travels_tbl0_User_tbl">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Travels" Type="Self.Travel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Travels">
               <PropertyRef Name="driverId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TravelToUser_tbl_TravelToUser_tbl">
-          <End Type="fingerPrintInBusDBModel.Travel" Role="Travel" Multiplicity="1" />
-          <End Type="fingerPrintInBusDBModel.TravelToUser" Role="TravelToUser" Multiplicity="*" />
+          <End Role="Travels" Type="Self.Travel" Multiplicity="1" />
+          <End Role="TravelToUser" Type="Self.TravelToUser" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Travel">
+            <Principal Role="Travels">
               <PropertyRef Name="travelCode" />
             </Principal>
             <Dependent Role="TravelToUser">
@@ -558,150 +508,182 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Bus">
-          <Key>
-            <PropertyRef Name="codeBus" />
-          </Key>
-          <Property Name="codeBus" Type="Int32" Nullable="false" />
-          <Property Name="codeLine" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Line" Relationship="fingerPrintInBusDBModel.FK_Buses_Lines" FromRole="Bus" ToRole="Line" />
-          <NavigationProperty Name="Travels" Relationship="fingerPrintInBusDBModel.FK_Travels_Buses" FromRole="Bus" ToRole="Travel" />
-        </EntityType>
-        <Association Name="FK_Buses_Lines">
-          <End Type="fingerPrintInBusDBModel.Line" Role="Line" Multiplicity="1" />
-          <End Type="fingerPrintInBusDBModel.Bus" Role="Bus" Multiplicity="*" />
+        <Association Name="FK_TravelToUser_tbl_User_tbl">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TravelToUser" Type="Self.TravelToUser" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Line">
-              <PropertyRef Name="codeLine" />
+            <Principal Role="User">
+              <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="Bus">
-              <PropertyRef Name="codeLine" />
+            <Dependent Role="TravelToUser">
+              <PropertyRef Name="userId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Travels_Buses">
-          <End Type="fingerPrintInBusDBModel.Bus" Role="Bus" Multiplicity="0..1" />
-          <End Type="fingerPrintInBusDBModel.Travel" Role="Travel" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Bus">
-              <PropertyRef Name="codeBus" />
-            </Principal>
-            <Dependent Role="Travel">
-              <PropertyRef Name="busCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityContainer Name="FINGERPRINTINBUSDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Areas" EntityType="Self.Area" />
+          <EntitySet Name="Buses" EntityType="Self.Bus" />
+          <EntitySet Name="Companies" EntityType="Self.Company" />
+          <EntitySet Name="ConstractToUsers" EntityType="Self.ConstractToUser" />
+          <EntitySet Name="ConstractTravels" EntityType="Self.ConstractTravel" />
+          <EntitySet Name="Lines" EntityType="Self.Line" />
+          <EntitySet Name="Profiles" EntityType="Self.Profile" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Travels" EntityType="Self.Travel" />
+          <EntitySet Name="TravelToUsers" EntityType="Self.TravelToUser" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_Lines_Areas" Association="Self.FK_Lines_Areas">
+            <End Role="Areas" EntitySet="Areas" />
+            <End Role="Lines" EntitySet="Lines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Buses_Lines" Association="Self.FK_Buses_Lines">
+            <End Role="Lines" EntitySet="Lines" />
+            <End Role="Buses" EntitySet="Buses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Travels_Buses" Association="Self.FK_Travels_Buses">
+            <End Role="Buses" EntitySet="Buses" />
+            <End Role="Travels" EntitySet="Travels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lines_Companies" Association="Self.FK_Lines_Companies">
+            <End Role="Companies" EntitySet="Companies" />
+            <End Role="Lines" EntitySet="Lines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConstractToUser_ConstractToUser" Association="Self.FK_ConstractToUser_ConstractToUser">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ConstractToUser" EntitySet="ConstractToUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConstractToUser_ConstractTravel" Association="Self.FK_ConstractToUser_ConstractTravel">
+            <End Role="ConstractTravel" EntitySet="ConstractTravels" />
+            <End Role="ConstractToUser" EntitySet="ConstractToUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_tbl_Profiles_tbl" Association="Self.FK_User_tbl_Profiles_tbl">
+            <End Role="Profiles" EntitySet="Profiles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Travels_tbl0_User_tbl" Association="Self.FK_Travels_tbl0_User_tbl">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Travels" EntitySet="Travels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TravelToUser_tbl_TravelToUser_tbl" Association="Self.FK_TravelToUser_tbl_TravelToUser_tbl">
+            <End Role="Travels" EntitySet="Travels" />
+            <End Role="TravelToUser" EntitySet="TravelToUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TravelToUser_tbl_User_tbl" Association="Self.FK_TravelToUser_tbl_User_tbl">
+            <End Role="User" EntitySet="Users" />
+            <End Role="TravelToUser" EntitySet="TravelToUsers" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="fingerPrintInBusDBModelStoreContainer" CdmEntityContainer="fingerPrintInBusDBEntities">
+        <EntityContainerMapping StorageEntityContainer="FINGERPRINTINBUSDBModelStoreContainer" CdmEntityContainer="FINGERPRINTINBUSDBEntities">
           <EntitySetMapping Name="Areas">
-            <EntityTypeMapping TypeName="fingerPrintInBusDBModel.Area">
+            <EntityTypeMapping TypeName="FINGERPRINTINBUSDBModel.Area">
               <MappingFragment StoreEntitySet="Areas">
-                <ScalarProperty Name="areaName" ColumnName="areaName" />
                 <ScalarProperty Name="areaCode" ColumnName="areaCode" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Companies">
-            <EntityTypeMapping TypeName="fingerPrintInBusDBModel.Company">
-              <MappingFragment StoreEntitySet="Companies">
-                <ScalarProperty Name="companyName" ColumnName="companyName" />
-                <ScalarProperty Name="companyCode" ColumnName="companyCode" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ConstractToUsers">
-            <EntityTypeMapping TypeName="fingerPrintInBusDBModel.ConstractToUser">
-              <MappingFragment StoreEntitySet="ConstractToUser">
-                <ScalarProperty Name="accumulatedAmount" ColumnName="accumulatedAmount" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
-                <ScalarProperty Name="constractCode" ColumnName="constractCode" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ConstractTravels">
-            <EntityTypeMapping TypeName="fingerPrintInBusDBModel.ConstractTravel">
-              <MappingFragment StoreEntitySet="ConstractTravel">
-                <ScalarProperty Name="contractName" ColumnName="contractName" />
-                <ScalarProperty Name="contractCode" ColumnName="contractCode" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Profiles">
-            <EntityTypeMapping TypeName="fingerPrintInBusDBModel.Profile">
-              <MappingFragment StoreEntitySet="Profiles">
-                <ScalarProperty Name="profileName" ColumnName="profileName" />
-                <ScalarProperty Name="profileCode" ColumnName="profileCode" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TravelToUsers">
-            <EntityTypeMapping TypeName="fingerPrintInBusDBModel.TravelToUser">
-              <MappingFragment StoreEntitySet="TravelToUser">
-                <ScalarProperty Name="dropStation" ColumnName="dropStation" />
-                <ScalarProperty Name="boardingStation" ColumnName="boardingStation" />
-                <ScalarProperty Name="hour" ColumnName="hour" />
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="travelCode" ColumnName="travelCode" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="fingerPrintInBusDBModel.User">
-              <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="isDriver" ColumnName="isDriver" />
-                <ScalarProperty Name="profileCode" ColumnName="profileCode" />
-                <ScalarProperty Name="fingerPrint" ColumnName="fingerPrint" />
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="userName" ColumnName="userName" />
-                <ScalarProperty Name="birthDate" ColumnName="birthDate" />
-                <ScalarProperty Name="lastName" ColumnName="lastName" />
-                <ScalarProperty Name="firstName" ColumnName="firstName" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Lines">
-            <EntityTypeMapping TypeName="fingerPrintInBusDBModel.Line">
-              <MappingFragment StoreEntitySet="Lines">
-                <ScalarProperty Name="companyCode" ColumnName="companyCode" />
-                <ScalarProperty Name="price" ColumnName="price" />
-                <ScalarProperty Name="codeArea" ColumnName="codeArea" />
-                <ScalarProperty Name="lineNumber" ColumnName="lineNumber" />
-                <ScalarProperty Name="codeLine" ColumnName="codeLine" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="fingerPrintInBusDBModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Travels">
-            <EntityTypeMapping TypeName="fingerPrintInBusDBModel.Travel">
-              <MappingFragment StoreEntitySet="Travels">
-                <ScalarProperty Name="driverId" ColumnName="driverId" />
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="busCode" ColumnName="busCode" />
-                <ScalarProperty Name="travelCode" ColumnName="travelCode" />
+                <ScalarProperty Name="areaName" ColumnName="areaName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Buses">
-            <EntityTypeMapping TypeName="fingerPrintInBusDBModel.Bus">
+            <EntityTypeMapping TypeName="FINGERPRINTINBUSDBModel.Bus">
               <MappingFragment StoreEntitySet="Buses">
-                <ScalarProperty Name="codeLine" ColumnName="codeLine" />
                 <ScalarProperty Name="codeBus" ColumnName="codeBus" />
+                <ScalarProperty Name="codeLine" ColumnName="codeLine" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="FINGERPRINTINBUSDBModel.Company">
+              <MappingFragment StoreEntitySet="Companies">
+                <ScalarProperty Name="companyCode" ColumnName="companyCode" />
+                <ScalarProperty Name="companyName" ColumnName="companyName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConstractToUsers">
+            <EntityTypeMapping TypeName="FINGERPRINTINBUSDBModel.ConstractToUser">
+              <MappingFragment StoreEntitySet="ConstractToUser">
+                <ScalarProperty Name="constractCode" ColumnName="constractCode" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="accumulatedAmount" ColumnName="accumulatedAmount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConstractTravels">
+            <EntityTypeMapping TypeName="FINGERPRINTINBUSDBModel.ConstractTravel">
+              <MappingFragment StoreEntitySet="ConstractTravel">
+                <ScalarProperty Name="contractCode" ColumnName="contractCode" />
+                <ScalarProperty Name="contractName" ColumnName="contractName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lines">
+            <EntityTypeMapping TypeName="FINGERPRINTINBUSDBModel.Line">
+              <MappingFragment StoreEntitySet="Lines">
+                <ScalarProperty Name="codeLine" ColumnName="codeLine" />
+                <ScalarProperty Name="lineNumber" ColumnName="lineNumber" />
+                <ScalarProperty Name="codeArea" ColumnName="codeArea" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="companyCode" ColumnName="companyCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Profiles">
+            <EntityTypeMapping TypeName="FINGERPRINTINBUSDBModel.Profile">
+              <MappingFragment StoreEntitySet="Profiles">
+                <ScalarProperty Name="profileCode" ColumnName="profileCode" />
+                <ScalarProperty Name="profileName" ColumnName="profileName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="FINGERPRINTINBUSDBModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Travels">
+            <EntityTypeMapping TypeName="FINGERPRINTINBUSDBModel.Travel">
+              <MappingFragment StoreEntitySet="Travels">
+                <ScalarProperty Name="travelCode" ColumnName="travelCode" />
+                <ScalarProperty Name="busCode" ColumnName="busCode" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="driverId" ColumnName="driverId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TravelToUsers">
+            <EntityTypeMapping TypeName="FINGERPRINTINBUSDBModel.TravelToUser">
+              <MappingFragment StoreEntitySet="TravelToUser">
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="travelCode" ColumnName="travelCode" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="hour" ColumnName="hour" />
+                <ScalarProperty Name="boardingStation" ColumnName="boardingStation" />
+                <ScalarProperty Name="dropStation" ColumnName="dropStation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="FINGERPRINTINBUSDBModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="birthDate" ColumnName="birthDate" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="fingerPrint" ColumnName="fingerPrint" />
+                <ScalarProperty Name="profileCode" ColumnName="profileCode" />
+                <ScalarProperty Name="isDriver" ColumnName="isDriver" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

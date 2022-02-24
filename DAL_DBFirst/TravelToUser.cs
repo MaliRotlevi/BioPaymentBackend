@@ -21,7 +21,7 @@ namespace DAL
         public int boardingStation { get; set; }
         public int dropStation { get; set; }
     
-        public virtual User User { get; set; }
         public virtual Travel Travel { get; set; }
+        public virtual User User { get; set; }
     }
 }

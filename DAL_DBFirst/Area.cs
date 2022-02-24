@@ -23,8 +23,6 @@ namespace DAL
         public int areaCode { get; set; }
         public string areaName { get; set; }
     
-        public virtual Area Areas1 { get; set; }
-        public virtual Area Area1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Line> Lines { get; set; }
     }

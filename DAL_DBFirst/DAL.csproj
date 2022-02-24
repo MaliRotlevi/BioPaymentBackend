@@ -65,84 +65,73 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Area.cs">
-      <DependentUpon>FingerPrintModel.tt</DependentUpon>
+      <DependentUpon>BioPaymentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BioPaymentModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BioPaymentModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BioPaymentModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BioPaymentModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BioPaymentModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BioPaymentModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Bus.cs">
-      <DependentUpon>FingerPrintModel.tt</DependentUpon>
+      <DependentUpon>BioPaymentModel.tt</DependentUpon>
     </Compile>
     <Compile Include="BusDAL.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Company.cs">
-      <DependentUpon>FingerPrintModel.tt</DependentUpon>
+      <DependentUpon>BioPaymentModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ConstractToUser.cs">
-      <DependentUpon>FingerPrintModel.tt</DependentUpon>
+      <DependentUpon>BioPaymentModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ConstractToUserDAL.cs" />
     <Compile Include="ConstractTravel.cs">
-      <DependentUpon>FingerPrintModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="FingerPrintModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>FingerPrintModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="FingerPrintModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>FingerPrintModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="FingerPrintModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>FingerPrintModel.edmx</DependentUpon>
+      <DependentUpon>BioPaymentModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Line.cs">
-      <DependentUpon>FingerPrintModel.tt</DependentUpon>
+      <DependentUpon>BioPaymentModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Profile.cs">
-      <DependentUpon>FingerPrintModel.tt</DependentUpon>
+      <DependentUpon>BioPaymentModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="sysdiagram.cs">
-      <DependentUpon>FingerPrintModel.tt</DependentUpon>
+      <DependentUpon>BioPaymentModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Travel.cs">
-      <DependentUpon>FingerPrintModel.tt</DependentUpon>
+      <DependentUpon>BioPaymentModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TravelsToUserDAL.cs" />
     <Compile Include="TravelToUser.cs">
-      <DependentUpon>FingerPrintModel.tt</DependentUpon>
+      <DependentUpon>BioPaymentModel.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">
-      <DependentUpon>FingerPrintModel.tt</DependentUpon>
+      <DependentUpon>BioPaymentModel.tt</DependentUpon>
     </Compile>
     <Compile Include="UserDAL.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EntityDeploy Include="FingerPrintModel.edmx">
+    <EntityDeploy Include="BioPaymentModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>FingerPrintModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>BioPaymentModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="FingerPrintModel.edmx.diagram">
-      <DependentUpon>FingerPrintModel.edmx</DependentUpon>
+    <None Include="BioPaymentModel.edmx.diagram">
+      <DependentUpon>BioPaymentModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="FingerPrintModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>FingerPrintModel.edmx</DependentUpon>
-      <LastGenOutput>FingerPrintModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="FingerPrintModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>FingerPrintModel.edmx</DependentUpon>
-      <LastGenOutput>FingerPrintModel.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
@@ -155,6 +144,18 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BioPaymentModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BioPaymentModel.edmx</DependentUpon>
+      <LastGenOutput>BioPaymentModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="BioPaymentModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BioPaymentModel.edmx</DependentUpon>
+      <LastGenOutput>BioPaymentModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

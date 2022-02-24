@@ -27,8 +27,8 @@ namespace DAL
         public Nullable<int> companyCode { get; set; }
     
         public virtual Area Area { get; set; }
-        public virtual Company Company { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bus> Buses { get; set; }
+        public virtual Company Company { get; set; }
     }
 }

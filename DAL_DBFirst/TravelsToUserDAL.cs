@@ -10,7 +10,7 @@ namespace DAL
     {
         public static void AddTravelToUSer(TravelToUser t)
         {
-            using (fingerPrintInBusDBEntities db = new fingerPrintInBusDBEntities())
+            using (FINGERPRINTINBUSDBEntities db = new FINGERPRINTINBUSDBEntities())
             {
                 db.TravelToUsers.Add(t);
                 db.SaveChanges();
@@ -18,7 +18,7 @@ namespace DAL
         }
         public static void DeleteTravelToUser(string userID,TravelToUser t)
         {
-            using (fingerPrintInBusDBEntities db = new fingerPrintInBusDBEntities())
+            using (FINGERPRINTINBUSDBEntities db = new FINGERPRINTINBUSDBEntities())
             {
                 if(db.Users.FirstOrDefault(x=>x.id==userID).isDriver==true)
                 {
@@ -32,7 +32,7 @@ namespace DAL
         public static List<TravelToUser> GetTravelsToUser(string id)
         {
             var t = new List<TravelToUser>();
-            using (fingerPrintInBusDBEntities db = new fingerPrintInBusDBEntities())
+            using (FINGERPRINTINBUSDBEntities db = new FINGERPRINTINBUSDBEntities())
             {
                 t = (List<TravelToUser>)db.TravelToUsers.ToList().Where(x => x.userId == id);
                 return t;

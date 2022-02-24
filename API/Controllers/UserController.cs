@@ -26,7 +26,7 @@ namespace API.Controllers
         }
         [Route("addUser")]
         [HttpPost]
-        public IHttpActionResult AddUser(UserDTO u)
+        public IHttpActionResult AddUser([FromBody]UserDTO u)
         {
             if (UserBL.CheckIfUserExist(u.id))
                 return Conflict();
@@ -36,7 +36,7 @@ namespace API.Controllers
         //האם צריך להחזיר את העצם ואם זה created בכלל
         [Route ("updateUser")]
         [HttpPut]
-        public IHttpActionResult UpdateUser(UserDTO u)
+        public IHttpActionResult UpdateUser([FromBody]UserDTO u)
         {
             if (!UserBL.UpdateUser(u))
                 return Conflict();

@@ -10,7 +10,7 @@ namespace DAL
     {
         public User AuthUser(string name, string pass)
         {
-            using (fingerPrintInBusDBEntities db = new fingerPrintInBusDBEntities())
+            using (FINGERPRINTINBUSDBEntities db = new FINGERPRINTINBUSDBEntities())
             {
                 User u = (db.Users .SingleOrDefault(a => a.userName == name && a.password == pass));
                     return u;
@@ -18,7 +18,7 @@ namespace DAL
         }
         public static List<User> AllUsers()
         {
-            using (fingerPrintInBusDBEntities db = new fingerPrintInBusDBEntities())
+            using (FINGERPRINTINBUSDBEntities db = new FINGERPRINTINBUSDBEntities())
             {
                 List<User> u = db.Users.ToList();
                 return u;
@@ -26,16 +26,21 @@ namespace DAL
         }
         public static Boolean GetUserById(string id)
         {
-            using (fingerPrintInBusDBEntities db = new fingerPrintInBusDBEntities())
+            using (FINGERPRINTINBUSDBEntities db = new FINGERPRINTINBUSDBEntities())
             {
-                User u = db.Users.FirstOrDefault(x => x.id == id);
-                return u != null;
+                var t= db.Users.Select(p => p.firstName);
+                var AllId = db.Users.Select(p => p.id);
+                if (!AllId.Contains(id))
+                {
+                    return false;
+                }
+                return true;
             }
 
         }
         public static User GetUserByUserNameAndPassword(string userName,string password)
         {
-            using (fingerPrintInBusDBEntities db = new fingerPrintInBusDBEntities())
+            using (FINGERPRINTINBUSDBEntities db = new FINGERPRINTINBUSDBEntities())
             {
                 User u = db.Users.FirstOrDefault(x => x.userName == userName && x.password == password);
                
@@ -44,7 +49,7 @@ namespace DAL
         }
         public static void AddUser(User u)
         {
-            using (fingerPrintInBusDBEntities db = new fingerPrintInBusDBEntities())
+            using (FINGERPRINTINBUSDBEntities db = new FINGERPRINTINBUSDBEntities())
             {
                 db.Users.Add(u);
                 db.SaveChanges();
@@ -52,7 +57,7 @@ namespace DAL
         }
         public static void RemoveUser(string id)
         {
-            using (fingerPrintInBusDBEntities db = new fingerPrintInBusDBEntities())
+            using (FINGERPRINTINBUSDBEntities db = new FINGERPRINTINBUSDBEntities())
             {
                 User u = db.Users.FirstOrDefault(x => x.id == id);
                 db.Users.Remove(u);
@@ -75,7 +80,7 @@ namespace DAL
         {
             if (u == null)
                 return false;
-            using (fingerPrintInBusDBEntities db = new fingerPrintInBusDBEntities())
+            using (FINGERPRINTINBUSDBEntities db = new FINGERPRINTINBUSDBEntities())
             {
                 User uu = db.Users.FirstOrDefault(x => x.id == u.id);
                 if (uu == null)
