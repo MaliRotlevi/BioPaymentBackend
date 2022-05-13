@@ -17,9 +17,9 @@ namespace DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
-            this.ConstractToUsers = new HashSet<ConstractToUser>();
             this.Travels = new HashSet<Travel>();
             this.TravelToUsers = new HashSet<TravelToUser>();
+            this.ContractToUsers = new HashSet<ContractToUser>();
         }
     
         public string id { get; set; }
@@ -31,13 +31,14 @@ namespace DAL
         public byte[] fingerPrint { get; set; }
         public Nullable<int> profileCode { get; set; }
         public Nullable<bool> isDriver { get; set; }
+        public string email { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ConstractToUser> ConstractToUsers { get; set; }
         public virtual Profile Profile { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Travel> Travels { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TravelToUser> TravelToUsers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ContractToUser> ContractToUsers { get; set; }
     }
 }

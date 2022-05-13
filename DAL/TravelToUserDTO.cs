@@ -15,6 +15,8 @@ namespace DTO
         public TimeSpan hour;
         public int boardingStation;
         public int dropStation;
+        public int line;
+        public double price;
 
         //פעולה שמקבלת עצם ממחלקה של מיקרוסופט וממירה אותו לעצם מטיפוס המחלקה שלנו
         public static TravelToUserDTO ToTravelToUserDTO(TravelToUser t)
@@ -26,6 +28,8 @@ namespace DTO
             tt.hour = t.hour;
             tt.boardingStation = t.boardingStation;
             tt.dropStation = t.dropStation;
+            tt.line = (int)t.line;
+            tt.price = (double)t.price;
             return tt;
         }
         //פעולה שממירה אוביקט מהמחלקה שלנו למחלקה של מייקרוסופט
@@ -38,6 +42,8 @@ namespace DTO
             tt.hour = t.hour;
             tt.boardingStation = t.boardingStation;
             tt.dropStation = t.dropStation;
+            tt.line = t.line;
+            tt.price = t.price;
             return tt;
         }
         //פעולה שממירה אוסף של מייקרוסופט לאוסף שלנו

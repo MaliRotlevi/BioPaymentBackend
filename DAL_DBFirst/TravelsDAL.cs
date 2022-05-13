@@ -3,18 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAL_DBFirst;
 
 namespace DAL
 {
-    class BusDAL
+    public class TravelsDAL
     {
-        public static void AddBus(Bus b)
+        public static List<Travel> GetAllTravles()
         {
+
             using (FINGERPRINTINBUSDBEntities db = new FINGERPRINTINBUSDBEntities())
             {
-                db.Buses.Add(b);
-                db.SaveChanges();
+                return db.Travels.ToList();
             }
         }
     }

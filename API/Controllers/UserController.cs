@@ -9,24 +9,32 @@ using System.Web.Http.Cors;
 
 namespace API.Controllers
 {
-    [EnableCors(methods:"*",origins:"*",headers:"*")]
+    [EnableCors(methods: "*", origins: "*", headers: "*")]
     [RoutePrefix("api/user")]
     public class UserController : ApiController
     {
-        
+
         [Route("getUser")]
         [HttpGet]
-        public UserDTO GetUser(string userName,string password)
+        public UserDTO GetUser(string userName, string password)
         {
-            UserDTO u = UserBL.GetUserByUserNameAndPassword(userName, password);
-            
-            return u;
-            
-              
+            try
+            {
+                UserDTO u = UserBL.GetUserByUserNameAndPassword(userName, password);
+                if (u != null)
+                {
+                    return u;
+                }
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
         }
         [Route("addUser")]
         [HttpPost]
-        public IHttpActionResult AddUser([FromBody]UserDTO u)
+        public IHttpActionResult AddUser([FromBody] UserDTO u)
         {
             if (UserBL.CheckIfUserExist(u.id))
                 return Conflict();
@@ -34,13 +42,20 @@ namespace API.Controllers
             return Created("Added successfully", u);
         }
         //האם צריך להחזיר את העצם ואם זה created בכלל
-        [Route ("updateUser")]
+        [Route("updateUser")]
         [HttpPut]
-        public IHttpActionResult UpdateUser([FromBody]UserDTO u)
+        public IHttpActionResult UpdateUser([FromBody] UserDTO u)
         {
-            if (!UserBL.UpdateUser(u))
-                return Conflict();
-            return Created("update successfully", u);
+            try 
+            {
+                if (!UserBL.UpdateUser(u))
+                    return Conflict();
+                return Created("update successfully", u);
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

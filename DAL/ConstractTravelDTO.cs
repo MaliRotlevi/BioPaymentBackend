@@ -7,44 +7,47 @@ using System.Threading.Tasks;
 
 namespace DTO
 {
-    class ConstractTravelDTO
+    public class ContractTravelDTO
     {
         public int contractCode;
         public string contractName;
+        public double price;
 
         //פעולה שמקבלת עצם ממחלקה של מיקרוסופט וממירה אותו לעצם מטיפוס המחלקה שלנו
-        public static ConstractTravelDTO ToConstractTravelDTO(ConstractTravel c)
+        public static ContractTravelDTO ToContractTravelDTO(ContractTravel c)
         {
-            ConstractTravelDTO cc = new ConstractTravelDTO();
+            ContractTravelDTO cc = new ContractTravelDTO();
             cc.contractCode = c.contractCode;
             cc.contractName = c.contractName;
+            cc.price = (double)c.price;
             return cc;
         }
         //פעולה שממירה אוביקט מהמחלקה שלנו למחלקה של מייקרוסופט
-        public static ConstractTravel ToConstractTravel(ConstractTravelDTO c)
+        public static ContractTravel ToContractTravel(ContractTravelDTO c)
         {
-            ConstractTravel cc = new ConstractTravel();
+            ContractTravel cc = new ContractTravel();
             cc.contractCode = c.contractCode;
             cc.contractName = c.contractName;
+            cc.price = c.price;
             return cc;
         }
         //פעולה שממירה אוסף של מייקרוסופט לאוסף שלנו
-        public static List<ConstractTravelDTO> ToConstractTravelDTOList(List<ConstractTravel> c)
+        public static List<ContractTravelDTO> ToContractTravelDTOList(List<ContractTravel> c)
         {
-            List<ConstractTravelDTO> cc = new List<ConstractTravelDTO>();
+            List<ContractTravelDTO> cc = new List<ContractTravelDTO>();
             foreach (var item in c)
             {
-                cc.Add(ToConstractTravelDTO(item));
+                cc.Add(ToContractTravelDTO(item));
             }
             return cc;
         }
         //ממירה אוסף שלנו לאוף של מייקרוסופט
-        public static List<ConstractTravel> ToConstractTravelList(List<ConstractTravelDTO> c)
+        public static List<ContractTravel> ToContractTravelList(List<ContractTravelDTO> c)
         {
-            List<ConstractTravel> cc = new List<ConstractTravel>();
+            List<ContractTravel> cc = new List<ContractTravel>();
             foreach (var item in c)
             {
-                cc.Add(ToConstractTravel(item));
+                cc.Add(ToContractTravel(item));
             }
             return cc;
         }

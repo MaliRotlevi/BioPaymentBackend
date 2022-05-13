@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DAL_DBFirst;
 
 namespace DAL
 {
@@ -31,11 +32,20 @@ namespace DAL
         //פעולה מוזרהה
         public static List<TravelToUser> GetTravelsToUser(string id)
         {
-            var t = new List<TravelToUser>();
+            
             using (FINGERPRINTINBUSDBEntities db = new FINGERPRINTINBUSDBEntities())
             {
-                t = (List<TravelToUser>)db.TravelToUsers.ToList().Where(x => x.userId == id);
-                return t;
+                List<TravelToUser> listResult = new List<TravelToUser>();
+                List<TravelToUser> listData = db.TravelToUsers.ToList();
+
+                for (int index = 0; index < listData.Count; index++)
+                {
+                    if (listData[index].userId == id)
+                    {
+                        listResult.Add(listData[index]);
+                    }
+                }
+                return listResult;
             }
         }
 

@@ -19,6 +19,7 @@ namespace DTO
         public string fingerPrint;
         public int profileCode;
         public bool isDriver;
+        public string email;
         //פעולה שמקבלת עצם ממחלקה של מיקרוסופט וממירה אותו לעצם מטיפוס המחלקה שלנו
         public static UserDTO ToUserDTO(User u)
         {
@@ -32,6 +33,7 @@ namespace DTO
             //uu.fingerPrint = u.fingerPrint;
             uu.profileCode = (int)u.profileCode;
             uu.isDriver = (bool)u.isDriver;
+            uu.email = u.email;
             return uu;
         }
         //פעולה שממירה אוביקט מהמחלקה שלנו למחלקה של מייקרוסופט
@@ -47,6 +49,7 @@ namespace DTO
             //uu.fingerPrint = u.fingerPrint;
             uu.profileCode = u.profileCode;
             uu.isDriver = u.isDriver;
+            uu.email = u.email;
             return uu;
         }
         //פעולה שממירה אוסף של מייקרוסופט לאוסף שלנו

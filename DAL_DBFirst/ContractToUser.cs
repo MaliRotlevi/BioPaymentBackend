@@ -12,13 +12,16 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class ConstractToUser
+    public partial class ContractToUser
     {
-        public int constractCode { get; set; }
+        public int contractCode { get; set; }
         public string userId { get; set; }
         public double accumulatedAmount { get; set; }
+        public Nullable<System.DateTime> startDate { get; set; }
+        public Nullable<System.DateTime> endDate { get; set; }
+        public bool isActive { get; set; }
     
         public virtual User User { get; set; }
-        public virtual ConstractTravel ConstractTravel { get; set; }
+        public virtual ContractTravel ContractTravel { get; set; }
     }
 }

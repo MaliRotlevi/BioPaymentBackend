@@ -26,21 +26,25 @@
           <Property Name="companyCode" Type="int" Nullable="false" />
           <Property Name="companyName" Type="nchar" MaxLength="10" />
         </EntityType>
-        <EntityType Name="ConstractToUser">
+        <EntityType Name="ContractToUser">
           <Key>
-            <PropertyRef Name="constractCode" />
+            <PropertyRef Name="contractCode" />
             <PropertyRef Name="userId" />
           </Key>
-          <Property Name="constractCode" Type="int" Nullable="false" />
+          <Property Name="contractCode" Type="int" Nullable="false" />
           <Property Name="userId" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="accumulatedAmount" Type="float" Nullable="false" />
+          <Property Name="startDate" Type="date" />
+          <Property Name="endDate" Type="date" />
+          <Property Name="isActive" Type="bit" Nullable="false" />
         </EntityType>
-        <EntityType Name="ConstractTravel">
+        <EntityType Name="ContractTravel">
           <Key>
             <PropertyRef Name="contractCode" />
           </Key>
           <Property Name="contractCode" Type="int" Nullable="false" />
           <Property Name="contractName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="price" Type="float" />
         </EntityType>
         <EntityType Name="Lines">
           <Key>
@@ -89,6 +93,8 @@
           <Property Name="hour" Type="time" Precision="7" Nullable="false" />
           <Property Name="boardingStation" Type="int" Nullable="false" />
           <Property Name="dropStation" Type="int" Nullable="false" />
+          <Property Name="line" Type="int" />
+          <Property Name="price" Type="float" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -103,6 +109,7 @@
           <Property Name="fingerPrint" Type="varbinary(max)" />
           <Property Name="profileCode" Type="int" />
           <Property Name="isDriver" Type="bit" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
         </EntityType>
         <Association Name="FK_Buses_Lines">
           <End Role="Lines" Type="Self.Lines" Multiplicity="1" />
@@ -118,25 +125,25 @@
         </Association>
         <Association Name="FK_ConstractToUser_ConstractToUser">
           <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="ConstractToUser" Type="Self.ConstractToUser" Multiplicity="*" />
+          <End Role="ContractToUser" Type="Self.ContractToUser" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="ConstractToUser">
+            <Dependent Role="ContractToUser">
               <PropertyRef Name="userId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ConstractToUser_ConstractTravel">
-          <End Role="ConstractTravel" Type="Self.ConstractTravel" Multiplicity="1" />
-          <End Role="ConstractToUser" Type="Self.ConstractToUser" Multiplicity="*" />
+          <End Role="ContractTravel" Type="Self.ContractTravel" Multiplicity="1" />
+          <End Role="ContractToUser" Type="Self.ContractToUser" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ConstractTravel">
+            <Principal Role="ContractTravel">
               <PropertyRef Name="contractCode" />
             </Principal>
-            <Dependent Role="ConstractToUser">
-              <PropertyRef Name="constractCode" />
+            <Dependent Role="ContractToUser">
+              <PropertyRef Name="contractCode" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -228,8 +235,8 @@
           <EntitySet Name="Areas" EntityType="Self.Areas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Buses" EntityType="Self.Buses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Companies" EntityType="Self.Companies" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ConstractToUser" EntityType="Self.ConstractToUser" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ConstractTravel" EntityType="Self.ConstractTravel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContractToUser" EntityType="Self.ContractToUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContractTravel" EntityType="Self.ContractTravel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Lines" EntityType="Self.Lines" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Profiles" EntityType="Self.Profiles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
@@ -242,11 +249,11 @@
           </AssociationSet>
           <AssociationSet Name="FK_ConstractToUser_ConstractToUser" Association="Self.FK_ConstractToUser_ConstractToUser">
             <End Role="User" EntitySet="User" />
-            <End Role="ConstractToUser" EntitySet="ConstractToUser" />
+            <End Role="ContractToUser" EntitySet="ContractToUser" />
           </AssociationSet>
           <AssociationSet Name="FK_ConstractToUser_ConstractTravel" Association="Self.FK_ConstractToUser_ConstractTravel">
-            <End Role="ConstractTravel" EntitySet="ConstractTravel" />
-            <End Role="ConstractToUser" EntitySet="ConstractToUser" />
+            <End Role="ContractTravel" EntitySet="ContractTravel" />
+            <End Role="ContractToUser" EntitySet="ContractToUser" />
           </AssociationSet>
           <AssociationSet Name="FK_Lines_Areas" Association="Self.FK_Lines_Areas">
             <End Role="Areas" EntitySet="Areas" />
@@ -306,24 +313,14 @@
           <Property Name="companyName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Lines" Relationship="Self.FK_Lines_Companies" FromRole="Companies" ToRole="Lines" />
         </EntityType>
-        <EntityType Name="ConstractToUser">
-          <Key>
-            <PropertyRef Name="constractCode" />
-            <PropertyRef Name="userId" />
-          </Key>
-          <Property Name="constractCode" Type="Int32" Nullable="false" />
-          <Property Name="userId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="accumulatedAmount" Type="Double" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="Self.FK_ConstractToUser_ConstractToUser" FromRole="ConstractToUser" ToRole="User" />
-          <NavigationProperty Name="ConstractTravel" Relationship="Self.FK_ConstractToUser_ConstractTravel" FromRole="ConstractToUser" ToRole="ConstractTravel" />
-        </EntityType>
-        <EntityType Name="ConstractTravel">
+        <EntityType Name="ContractTravel">
           <Key>
             <PropertyRef Name="contractCode" />
           </Key>
           <Property Name="contractCode" Type="Int32" Nullable="false" />
           <Property Name="contractName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="ConstractToUsers" Relationship="Self.FK_ConstractToUser_ConstractTravel" FromRole="ConstractTravel" ToRole="ConstractToUser" />
+          <Property Name="price" Type="Double" />
+          <NavigationProperty Name="ContractToUsers" Relationship="FINGERPRINTINBUSDBModel.FK_ConstractToUser_ConstractTravel" FromRole="ContractTravel" ToRole="ContractToUser" />
         </EntityType>
         <EntityType Name="Line">
           <Key>
@@ -381,6 +378,8 @@
           <Property Name="dropStation" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Travel" Relationship="Self.FK_TravelToUser_tbl_TravelToUser_tbl" FromRole="TravelToUser" ToRole="Travels" />
           <NavigationProperty Name="User" Relationship="Self.FK_TravelToUser_tbl_User_tbl" FromRole="TravelToUser" ToRole="User" />
+          <Property Name="line" Type="Int32" />
+          <Property Name="price" Type="Double" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -395,10 +394,11 @@
           <Property Name="fingerPrint" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="profileCode" Type="Int32" />
           <Property Name="isDriver" Type="Boolean" />
-          <NavigationProperty Name="ConstractToUsers" Relationship="Self.FK_ConstractToUser_ConstractToUser" FromRole="User" ToRole="ConstractToUser" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Profile" Relationship="Self.FK_User_tbl_Profiles_tbl" FromRole="User" ToRole="Profiles" />
           <NavigationProperty Name="Travels" Relationship="Self.FK_Travels_tbl0_User_tbl" FromRole="User" ToRole="Travels" />
           <NavigationProperty Name="TravelToUsers" Relationship="Self.FK_TravelToUser_tbl_User_tbl" FromRole="User" ToRole="TravelToUser" />
+          <NavigationProperty Name="ContractToUsers" Relationship="FINGERPRINTINBUSDBModel.FK_ConstractToUser_ConstractToUser" FromRole="User" ToRole="ContractToUser" />
         </EntityType>
         <Association Name="FK_Lines_Areas">
           <End Role="Areas" Type="Self.Area" Multiplicity="0..1" />
@@ -445,30 +445,6 @@
             </Principal>
             <Dependent Role="Lines">
               <PropertyRef Name="companyCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ConstractToUser_ConstractToUser">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="ConstractToUser" Type="Self.ConstractToUser" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="ConstractToUser">
-              <PropertyRef Name="userId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ConstractToUser_ConstractTravel">
-          <End Role="ConstractTravel" Type="Self.ConstractTravel" Multiplicity="1" />
-          <End Role="ConstractToUser" Type="Self.ConstractToUser" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ConstractTravel">
-              <PropertyRef Name="contractCode" />
-            </Principal>
-            <Dependent Role="ConstractToUser">
-              <PropertyRef Name="constractCode" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -524,8 +500,7 @@
           <EntitySet Name="Areas" EntityType="Self.Area" />
           <EntitySet Name="Buses" EntityType="Self.Bus" />
           <EntitySet Name="Companies" EntityType="Self.Company" />
-          <EntitySet Name="ConstractToUsers" EntityType="Self.ConstractToUser" />
-          <EntitySet Name="ConstractTravels" EntityType="Self.ConstractTravel" />
+          <EntitySet Name="ContractTravels" EntityType="Self.ContractTravel" />
           <EntitySet Name="Lines" EntityType="Self.Line" />
           <EntitySet Name="Profiles" EntityType="Self.Profile" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
@@ -548,14 +523,6 @@
             <End Role="Companies" EntitySet="Companies" />
             <End Role="Lines" EntitySet="Lines" />
           </AssociationSet>
-          <AssociationSet Name="FK_ConstractToUser_ConstractToUser" Association="Self.FK_ConstractToUser_ConstractToUser">
-            <End Role="User" EntitySet="Users" />
-            <End Role="ConstractToUser" EntitySet="ConstractToUsers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ConstractToUser_ConstractTravel" Association="Self.FK_ConstractToUser_ConstractTravel">
-            <End Role="ConstractTravel" EntitySet="ConstractTravels" />
-            <End Role="ConstractToUser" EntitySet="ConstractToUsers" />
-          </AssociationSet>
           <AssociationSet Name="FK_User_tbl_Profiles_tbl" Association="Self.FK_User_tbl_Profiles_tbl">
             <End Role="Profiles" EntitySet="Profiles" />
             <End Role="User" EntitySet="Users" />
@@ -572,7 +539,54 @@
             <End Role="User" EntitySet="Users" />
             <End Role="TravelToUser" EntitySet="TravelToUsers" />
           </AssociationSet>
+          <EntitySet Name="ContractToUsers" EntityType="FINGERPRINTINBUSDBModel.ContractToUser" />
+          <AssociationSet Name="FK_ConstractToUser_ConstractToUser" Association="FINGERPRINTINBUSDBModel.FK_ConstractToUser_ConstractToUser">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ContractToUser" EntitySet="ContractToUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConstractToUser_ConstractTravel" Association="FINGERPRINTINBUSDBModel.FK_ConstractToUser_ConstractTravel">
+            <End Role="ContractTravel" EntitySet="ContractTravels" />
+            <End Role="ContractToUser" EntitySet="ContractToUsers" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="ContractToUser">
+          <Key>
+            <PropertyRef Name="contractCode" />
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="contractCode" Type="Int32" Nullable="false" />
+          <Property Name="userId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="accumulatedAmount" Type="Double" Nullable="false" />
+          <Property Name="startDate" Type="DateTime" Precision="0" />
+          <Property Name="endDate" Type="DateTime" Precision="0" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="FINGERPRINTINBUSDBModel.FK_ConstractToUser_ConstractToUser" FromRole="ContractToUser" ToRole="User" />
+          <NavigationProperty Name="ContractTravel" Relationship="FINGERPRINTINBUSDBModel.FK_ConstractToUser_ConstractTravel" FromRole="ContractToUser" ToRole="ContractTravel" />
+        </EntityType>
+        <Association Name="FK_ConstractToUser_ConstractToUser">
+          <End Type="FINGERPRINTINBUSDBModel.User" Role="User" Multiplicity="1" />
+          <End Type="FINGERPRINTINBUSDBModel.ContractToUser" Role="ContractToUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ContractToUser">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConstractToUser_ConstractTravel">
+          <End Type="FINGERPRINTINBUSDBModel.ContractTravel" Role="ContractTravel" Multiplicity="1" />
+          <End Type="FINGERPRINTINBUSDBModel.ContractToUser" Role="ContractToUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContractTravel">
+              <PropertyRef Name="contractCode" />
+            </Principal>
+            <Dependent Role="ContractToUser">
+              <PropertyRef Name="contractCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -603,20 +617,12 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ConstractToUsers">
-            <EntityTypeMapping TypeName="FINGERPRINTINBUSDBModel.ConstractToUser">
-              <MappingFragment StoreEntitySet="ConstractToUser">
-                <ScalarProperty Name="constractCode" ColumnName="constractCode" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
-                <ScalarProperty Name="accumulatedAmount" ColumnName="accumulatedAmount" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ConstractTravels">
-            <EntityTypeMapping TypeName="FINGERPRINTINBUSDBModel.ConstractTravel">
-              <MappingFragment StoreEntitySet="ConstractTravel">
+          <EntitySetMapping Name="ContractTravels">
+            <EntityTypeMapping TypeName="FINGERPRINTINBUSDBModel.ContractTravel">
+              <MappingFragment StoreEntitySet="ContractTravel">
                 <ScalarProperty Name="contractCode" ColumnName="contractCode" />
                 <ScalarProperty Name="contractName" ColumnName="contractName" />
+                <ScalarProperty Name="price" ColumnName="price" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -663,6 +669,8 @@
           <EntitySetMapping Name="TravelToUsers">
             <EntityTypeMapping TypeName="FINGERPRINTINBUSDBModel.TravelToUser">
               <MappingFragment StoreEntitySet="TravelToUser">
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="line" ColumnName="line" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="travelCode" ColumnName="travelCode" />
                 <ScalarProperty Name="date" ColumnName="date" />
@@ -684,6 +692,19 @@
                 <ScalarProperty Name="fingerPrint" ColumnName="fingerPrint" />
                 <ScalarProperty Name="profileCode" ColumnName="profileCode" />
                 <ScalarProperty Name="isDriver" ColumnName="isDriver" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContractToUsers">
+            <EntityTypeMapping TypeName="FINGERPRINTINBUSDBModel.ContractToUser">
+              <MappingFragment StoreEntitySet="ContractToUser">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="endDate" ColumnName="endDate" />
+                <ScalarProperty Name="startDate" ColumnName="startDate" />
+                <ScalarProperty Name="accumulatedAmount" ColumnName="accumulatedAmount" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="contractCode" ColumnName="contractCode" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

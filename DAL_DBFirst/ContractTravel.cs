@@ -12,18 +12,19 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class ConstractTravel
+    public partial class ContractTravel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ConstractTravel()
+        public ContractTravel()
         {
-            this.ConstractToUsers = new HashSet<ConstractToUser>();
+            this.ContractToUsers = new HashSet<ContractToUser>();
         }
     
         public int contractCode { get; set; }
         public string contractName { get; set; }
+        public Nullable<double> price { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ConstractToUser> ConstractToUsers { get; set; }
+        public virtual ICollection<ContractToUser> ContractToUsers { get; set; }
     }
 }

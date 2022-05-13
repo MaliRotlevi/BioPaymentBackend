@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DTO
 {
-    class TravelDTO
+    public class TravelDTO
     {
         
             public int travelCode;

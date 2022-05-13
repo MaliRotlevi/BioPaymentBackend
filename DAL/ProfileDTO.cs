@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DTO
 {
-    class ProfileDTO
+    public class ProfileDTO
     {
 
        

@@ -20,6 +20,8 @@ namespace DAL
         public System.TimeSpan hour { get; set; }
         public int boardingStation { get; set; }
         public int dropStation { get; set; }
+        public Nullable<int> line { get; set; }
+        public Nullable<double> price { get; set; }
     
         public virtual Travel Travel { get; set; }
         public virtual User User { get; set; }

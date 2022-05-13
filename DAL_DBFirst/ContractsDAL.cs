@@ -7,14 +7,14 @@ using DAL_DBFirst;
 
 namespace DAL
 {
-    class BusDAL
+   public class ContractsDAL
     {
-        public static void AddBus(Bus b)
+        public static List<ContractTravel> GetAllContracts()
         {
+
             using (FINGERPRINTINBUSDBEntities db = new FINGERPRINTINBUSDBEntities())
             {
-                db.Buses.Add(b);
-                db.SaveChanges();
+                return db.ContractTravels.ToList();
             }
         }
     }

@@ -10,16 +10,14 @@ using System.Web.Http.Cors;
 namespace API.Controllers
 {
     [EnableCors(methods: "*", origins: "*", headers: "*")]
-    [RoutePrefix("api/travelsToUser")]
-
-    public class TravelToUserController : ApiController
+    [RoutePrefix("api/travels")]
+    public class TravelsController : ApiController
     {
-        [Route ("getAllTravelsToUser")]
+        [Route("getAllTravels")]
         [HttpGet]
-        public List<TravelToUserDTO> GetTravelsToUser(string id)
+        public List<TravelDTO> GetAllTravels()
         {
-            return TravelToUserBL.GetAllTravelsToUser(id);
+            return TravelsBL.GetAllTravels();
         }
-
     }
 }

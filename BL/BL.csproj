@@ -66,12 +66,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusBL.cs" />
-    <Compile Include="ConstractToUserBL.cs" />
+    <Compile Include="ContractsBL.cs" />
+    <Compile Include="ContractToUserBL.cs" />
+    <Compile Include="ProfileBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TravelsBL.cs" />
     <Compile Include="TravelToUserBL.cs" />
     <Compile Include="UserBL.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>

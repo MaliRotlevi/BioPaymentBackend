@@ -12,11 +12,7 @@ namespace BL
 {
     public class UserBL
     {
-        public string Auth(string n, string p)
-        {
-
-            return null;// new DAL_DBFirst.UserDAL ().AuthUser (n,p).id;
-        }
+        
         public static List<UserDTO> GetListUsers()
         {
             List<UserDTO> u = new List<UserDTO>();
@@ -54,7 +50,7 @@ namespace BL
         public static bool UpdateUser(UserDTO u)
         {
             User uu = UserDTO.ToUser(u);
-            return UserDAL.UpdateUser(uu);
+            return UserDAL.UpdateUser2(uu);
         }
     }
 }
